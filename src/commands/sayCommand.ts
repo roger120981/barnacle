@@ -1,7 +1,12 @@
-import { ApplicationCommandOptionType, type CommandInteraction } from "@buape/carbon"
+import {
+	ApplicationCommandOptionType,
+	Container,
+	type CommandInteraction,
+	TextDisplay,
+} from "@buape/carbon"
 import BaseCommand from "./base.js"
 
-export default abstract class GotoCommand extends BaseCommand {
+export default abstract class SayCommand extends BaseCommand {
 	options = [
 		{
 			name: "user",
@@ -18,8 +23,10 @@ export default abstract class GotoCommand extends BaseCommand {
 			? `${this.formatMention(user.id)}${this.lowercaseFirstLetter(this.message)}`
 			: this.message
 
+		const container = new Container([new TextDisplay(message)])
+
 		await interaction.reply({
-			content: message
+			components: [container]
 		})
 	}
 
