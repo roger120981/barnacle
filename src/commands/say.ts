@@ -1,4 +1,8 @@
-import { CommandWithSubcommands } from "@buape/carbon"
+import {
+	ApplicationIntegrationType,
+	CommandWithSubcommands,
+	InteractionContextType
+} from "@buape/carbon"
 import SayCommand from "./sayCommand.js"
 
 const guideLink = "https://discord.com/channels/1456350064065904867/@home"
@@ -93,6 +97,11 @@ class SayBlogRenameCommand extends SayCommand {
 export default class SayRootCommand extends CommandWithSubcommands {
 	name = "say"
 	description = "Share common resources"
+	integrationTypes = [
+		ApplicationIntegrationType.GuildInstall,
+		ApplicationIntegrationType.UserInstall
+	]
+	contexts = [InteractionContextType.Guild, InteractionContextType.BotDM]
 	subcommands = [
 		new SayModelCommand(),
 		new SayHelpCommand(),

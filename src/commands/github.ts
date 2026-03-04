@@ -1,7 +1,9 @@
 import {
 	ApplicationCommandOptionType,
+	ApplicationIntegrationType,
 	Container,
 	type CommandInteraction,
+	InteractionContextType,
 	LinkButton,
 	Section,
 	Separator,
@@ -53,7 +55,7 @@ class GitHubLinkButton extends LinkButton {
 
 const requestHeaders = {
 	Accept: "application/vnd.github+json",
-	"User-Agent": "barnacle"
+	"User-Agent": "hermit"
 }
 
 const truncateText = (text: string, limit: number) =>
@@ -74,6 +76,11 @@ const fetchJson = async (url: string): Promise<unknown | null> => {
 export default class GithubCommand extends BaseCommand {
 	name = "github"
 	description = "Find a GitHub issue or pull request"
+	integrationTypes = [
+		ApplicationIntegrationType.GuildInstall,
+		ApplicationIntegrationType.UserInstall
+	]
+	contexts = [InteractionContextType.Guild, InteractionContextType.BotDM]
 	options = [
 		{
 			name: "number",
@@ -83,20 +90,20 @@ export default class GithubCommand extends BaseCommand {
 		},
 		{
 			name: "user",
-			description: "Repository owner (default: clawdbot)",
+			description: "Repository owner (default: openclaw)",
 			type: ApplicationCommandOptionType.String
 		},
 		{
 			name: "repo",
-			description: "Repository name (default: clawdbot)",
+			description: "Repository name (default: hermit)",
 			type: ApplicationCommandOptionType.String
 		}
 	]
 
 	async run(interaction: CommandInteraction) {
 		const number = interaction.options.getInteger("number", true)
-		const owner = interaction.options.getString("user") ?? "clawdbot"
-		const repo = interaction.options.getString("repo") ?? "clawdbot"
+		const owner = interaction.options.getString("user") ?? "openclaw"
+		const repo = interaction.options.getString("repo") ?? "hermit"
 		const repoName = `${owner}/${repo}`
 		const apiUrl = `https://api.github.com/repos/${owner}/${repo}/issues/${number}`
 

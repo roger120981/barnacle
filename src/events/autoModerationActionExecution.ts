@@ -74,7 +74,7 @@ const fetchChannelWebhooks = async (client: Client, channelId: string) => {
 
 const createChannelWebhook = async (client: Client, channelId: string) => {
 	return (await client.rest.post(Routes.channelWebhooks(channelId), {
-		body: { name: "Barnacle Automod" }
+		body: { name: "Hermit Automod" }
 	})) as { id: string; token?: string }
 }
 

@@ -1,6 +1,8 @@
-# barnacle
+# hermit
 
 A Discord bot built with [Carbon](https://carbon.buape.com).
+
+Repository: https://github.com/openclaw/hermit
 
 ## Setup
 
@@ -25,7 +27,7 @@ bun run dev
 
 ## Commands
 
-- `/github` - Look up an issue or PR (defaults to clawdbot/clawdbot)
+- `/github` - Look up an issue or PR (defaults to openclaw/hermit)
 
 ## Gateway Events
 

@@ -1,12 +1,19 @@
 import {
 	ApplicationCommandOptionType,
+	ApplicationIntegrationType,
 	Container,
 	type CommandInteraction,
+	InteractionContextType,
 	TextDisplay,
 } from "@buape/carbon"
 import BaseCommand from "./base.js"
 
 export default abstract class SayCommand extends BaseCommand {
+	integrationTypes = [
+		ApplicationIntegrationType.GuildInstall,
+		ApplicationIntegrationType.UserInstall
+	]
+	contexts = [InteractionContextType.Guild, InteractionContextType.BotDM]
 	options = [
 		{
 			name: "user",
