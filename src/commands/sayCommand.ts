@@ -14,6 +14,7 @@ export default abstract class SayCommand extends BaseCommand {
 		ApplicationIntegrationType.UserInstall
 	]
 	contexts = [InteractionContextType.Guild, InteractionContextType.BotDM]
+	protected useRawContent = false
 	options = [
 		{
 			name: "user",
@@ -29,6 +30,13 @@ export default abstract class SayCommand extends BaseCommand {
 		const message = user
 			? `${this.formatMention(user.id)}${this.lowercaseFirstLetter(this.message)}`
 			: this.message
+
+		if (this.useRawContent) {
+			await interaction.reply({
+				content: message
+			})
+			return
+		}
 
 		const container = new Container([new TextDisplay(message)])
 
