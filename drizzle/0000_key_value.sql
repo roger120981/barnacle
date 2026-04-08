@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS keyValue (
-  key TEXT PRIMARY KEY,
-  value TEXT NOT NULL,
-  createdAt INTEGER NOT NULL,
-  updatedAt INTEGER NOT NULL
-);
